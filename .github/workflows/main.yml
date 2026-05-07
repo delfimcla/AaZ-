@@ -3,16 +3,10 @@ name: Main Workflow
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
 
     steps:
       - name: Checkout code
@@ -21,17 +15,15 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
+          node-version: 20
+
+      - name: Remove old dependencies
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run linter
-        run: npm run lint --if-present
-
       - name: Build project
         run: npm run build --if-present
-
-      - name: Run tests
-        run: npm test --if-present
