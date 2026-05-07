@@ -35,7 +35,3 @@ jobs:
 
     - name: Run tests
       run: npm test --if-present
-
-    - name: Upload coverage
-      uses: codecov/codecov-action@v3
-      if: always()
