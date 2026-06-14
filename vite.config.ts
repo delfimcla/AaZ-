@@ -7,12 +7,12 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '');
 
   return {
-    base: '/AaZ-/',
+    base: '/',
 
     plugins: [react(), tailwindcss()],
 
     define: {
-      'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+      'process.env.GEMINI_API_KEY': JSON.stringify(env.VITE_GOOGLE_GENAI_API_KEY || env.GEMINI_API_KEY),
     },
 
     resolve: {
@@ -23,6 +23,12 @@ export default defineConfig(({ mode }) => {
 
     server: {
       hmr: process.env.DISABLE_HMR !== 'true',
+    },
+
+    build: {
+      outDir: 'dist',
+      sourcemap: false,
+      minify: 'terser',
     },
   };
 });
