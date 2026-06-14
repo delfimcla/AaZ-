@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: aaz-app
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: npm run preview
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: VITE_GOOGLE_GENAI_API_KEY
+        scope: run
