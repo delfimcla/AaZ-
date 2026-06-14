@@ -15,11 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-   if: false
-build:    
-   if: false
-   runs-on: ubuntu-latest
-steps:
+  build:
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -39,10 +37,9 @@ steps:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-  deploy:
-      if: false
-    needs: build
 
+  deploy:
+    needs: build
     runs-on: ubuntu-latest
 
     environment:
